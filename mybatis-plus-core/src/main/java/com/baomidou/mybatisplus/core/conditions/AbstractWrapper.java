@@ -29,6 +29,7 @@ import com.baomidou.mybatisplus.core.toolkit.sql.StringEscape;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiPredicate;
@@ -515,6 +516,15 @@ public abstract class AbstractWrapper<T, R, Children extends AbstractWrapper<T, 
      */
     protected String columnsToString(R... columns) {
         return Arrays.stream(columns).map(this::columnToString).collect(joining(StringPool.COMMA));
+    }
+
+    /**
+     * 多字段转换为逗号 "," 分割字符串
+     *
+     * @param columns 多字段
+     */
+    protected String columnsToString(List<R> columns) {
+        return columns.stream().map(this::columnToString).collect(joining(StringPool.COMMA));
     }
 
     @Override
